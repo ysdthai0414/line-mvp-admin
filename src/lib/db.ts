@@ -49,16 +49,22 @@ export function getPool(): Pool {
   return pool;
 }
 
+// mysql2 の execute() 型定義は named placeholder（runtime オプション
+// `namedPlaceholders: true` で有効）を公式サポートしていないため、
+// 第2引数の型を緩めるためのローカル別名。
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type ExecuteParams = any;
+
 /**
  * SELECT クエリの薄いラッパー。
  * @param sql - SQL 文字列。`:name` 形式の named placeholder を推奨
- * @param params - パラメータ。オブジェクトでも配列でも可
+ * @param params - パラメータ。オブジェクト（named）でも配列（positional）でも可
  */
 export async function query<T extends RowDataPacket = RowDataPacket>(
   sql: string,
   params?: Record<string, unknown> | unknown[]
 ): Promise<T[]> {
-  const [rows] = await getPool().execute<T[]>(sql, params);
+  const [rows] = await getPool().execute<T[]>(sql, params as ExecuteParams);
   return rows;
 }
 
@@ -70,7 +76,10 @@ export async function execute(
   sql: string,
   params?: Record<string, unknown> | unknown[]
 ): Promise<ResultSetHeader> {
-  const [result] = await getPool().execute<ResultSetHeader>(sql, params);
+  const [result] = await getPool().execute<ResultSetHeader>(
+    sql,
+    params as ExecuteParams
+  );
   return result;
 }
 
