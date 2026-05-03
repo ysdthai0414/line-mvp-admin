@@ -43,6 +43,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { getCases } from "@/lib/api-client"
 import { INDUSTRY_LIST } from "@/lib/master-data"
 import {
   CASE_STATUS_LABELS,
@@ -273,22 +274,14 @@ function CasesListContent() {
   }
 
   React.useEffect(() => {
-    let cancelled = false
-    fetch("/mocks/cases.json")
-      .then((r) => {
-        if (!r.ok) throw new Error("/mocks/cases.json failed")
-        return r.json()
-      })
-      .then((d: Case[]) => {
-        if (!cancelled) setCases(d)
-      })
+    const ac = new AbortController()
+    getCases({ signal: ac.signal })
+      .then((d) => setCases(d as Case[]))
       .catch((e: unknown) => {
-        if (!cancelled)
-          setError(e instanceof Error ? e.message : String(e))
+        if (e instanceof Error && e.name === "AbortError") return
+        setError(e instanceof Error ? e.message : String(e))
       })
-    return () => {
-      cancelled = true
-    }
+    return () => ac.abort()
   }, [])
 
   const loading = !cases && !error

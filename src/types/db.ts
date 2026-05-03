@@ -51,6 +51,54 @@ export interface ApprovedCompanyRow extends RowDataPacket {
 }
 
 // ---------------------------------------------------------------------
+// Initiatives（取り組み事例：配信ネタ）
+// Bot 側 db/schema_v3.sql 準拠（v2 で導入、v3 で bullet_points 追加）
+// ---------------------------------------------------------------------
+export type InitiativeStatus = "draft" | "published";
+
+export interface InitiativeRow extends RowDataPacket {
+  id: number;
+  approved_company_id: number;
+  title: string;
+  summary: string | null;
+  detail_url: string | null;
+  category: string | null;
+  industry_tags: unknown;            // JSON: string[]
+  target_themes: unknown;            // JSON: string[]
+  cover_image_url: string | null;
+  bullet_points: unknown;            // JSON: string[]
+  status: InitiativeStatus;
+  source: string | null;
+  source_row: unknown;
+  created_at: Date;
+  updated_at: Date;
+}
+
+// 管理画面（UI）の Case 型互換 DTO
+// public/mocks/cases.json と同形（mock の status は draft/scheduled/published/archived の4値だが、
+// DB は現状 draft/published のみ。scheduled/archived は Layer 2 でスキーマ追加予定）
+export interface CaseDto {
+  id: string;                        // "case_0001"
+  title: string;
+  company_id: string;                // "co_00001"
+  company_name: string;
+  author_id: string | null;          // 現状 DB に概念無し → null
+  status: "draft" | "scheduled" | "published" | "archived";
+  thumbnail_url: string;
+  summary: string;
+  content: string;
+  tags: string[];
+  pdf_url: string;
+  created_at: string;                // ISO datetime
+  updated_at: string;
+  publish_at: string | null;         // 現状 DB に無い → null
+  target_industries: string[];       // ← industry_tags
+  target_sales_phases: string[];     // 現状 DB に無い → []
+  pdf_filename: string;
+  upload_at: string;                 // = created_at
+}
+
+// ---------------------------------------------------------------------
 // 管理画面（UI）が期待する形（public/mocks/companies.json と同形）
 // ---------------------------------------------------------------------
 export interface CompanyDto {

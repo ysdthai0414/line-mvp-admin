@@ -45,11 +45,21 @@ export async function getCurrentStaff(opts?: FetchOptions): Promise<CurrentStaff
 // ---------------------------------------------------------------------
 // /api/companies
 // ---------------------------------------------------------------------
-import type { CompanyDto } from "@/types/db";
+import type { CaseDto, CompanyDto } from "@/types/db";
 
 export async function getCompanies(opts?: FetchOptions): Promise<CompanyDto[]> {
   return fetchJson<CompanyDto[]>(
     USE_MOCK ? "/mocks/companies.json" : "/api/companies",
+    opts
+  );
+}
+
+// ---------------------------------------------------------------------
+// /api/initiatives
+// ---------------------------------------------------------------------
+export async function getCases(opts?: FetchOptions): Promise<CaseDto[]> {
+  return fetchJson<CaseDto[]>(
+    USE_MOCK ? "/mocks/cases.json" : "/api/initiatives",
     opts
   );
 }
