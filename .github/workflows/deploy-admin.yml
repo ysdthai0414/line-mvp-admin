@@ -48,8 +48,10 @@ jobs:
           name: node-app
           path: .next/standalone
           if-no-files-found: error
-          # 隠しファイル（.env など）はそもそも standalone に含めない設計だが念のため
-          include-hidden-files: false
+          # standalone バンドル内に .next/ ディレクトリが含まれており、
+          # これは hidden 扱いされて除外されてしまうので必ず true。
+          # （hidden のうち .git や .DS_Store は cp で持ち込んでいないので問題なし）
+          include-hidden-files: true
 
   deploy:
     runs-on: ubuntu-latest
