@@ -45,7 +45,14 @@ export async function getCurrentStaff(opts?: FetchOptions): Promise<CurrentStaff
 // ---------------------------------------------------------------------
 // /api/companies
 // ---------------------------------------------------------------------
-import type { CaseDto, CompanyDto, UserDto } from "@/types/db";
+import type {
+  CaseDto,
+  CompanyDto,
+  MatchingDto,
+  MatchingUiStatus,
+  StatsDto,
+  UserDto,
+} from "@/types/db";
 
 export async function getCompanies(opts?: FetchOptions): Promise<CompanyDto[]> {
   return fetchJson<CompanyDto[]>(
@@ -72,4 +79,48 @@ export async function getUsers(opts?: FetchOptions): Promise<UserDto[]> {
     USE_MOCK ? "/mocks/users.json" : "/api/users",
     opts
   );
+}
+
+// ---------------------------------------------------------------------
+// /api/matchings
+// ---------------------------------------------------------------------
+export async function getMatchings(opts?: FetchOptions): Promise<MatchingDto[]> {
+  return fetchJson<MatchingDto[]>(
+    USE_MOCK ? "/mocks/matchings.json" : "/api/matchings",
+    opts
+  );
+}
+
+// ---------------------------------------------------------------------
+// /api/stats
+// ---------------------------------------------------------------------
+export async function getStats(opts?: FetchOptions): Promise<StatsDto> {
+  return fetchJson<StatsDto>(
+    USE_MOCK ? "/mocks/stats.json" : "/api/stats",
+    opts
+  );
+}
+
+/**
+ * マッチング申請のステータス更新（admin / manager のみ）。
+ * 成功時 { ok: true, ... } を返す。
+ */
+export async function updateMatchingStatus(
+  id: string,
+  status: MatchingUiStatus
+): Promise<{ ok: true; id: string; status: MatchingUiStatus }> {
+  // mock モードでは実 PATCH が無いので no-op して成功を装う
+  if (USE_MOCK) {
+    return Promise.resolve({ ok: true, id, status });
+  }
+  const res = await fetch(`/api/matchings/${id}`, {
+    method: "PATCH",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ status }),
+  });
+  if (!res.ok) {
+    const body = await res.text().catch(() => "");
+    throw new Error(`PATCH /api/matchings/${id} failed: ${res.status} ${body}`);
+  }
+  return res.json();
 }

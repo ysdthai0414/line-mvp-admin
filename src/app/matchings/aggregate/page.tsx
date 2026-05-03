@@ -39,6 +39,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { getMatchings, getStats, getUsers } from "@/lib/api-client"
 import { INDUSTRY_LIST, PREFECTURE_LIST } from "@/lib/master-data"
 import {
   MATCHING_THRESHOLD,
@@ -263,25 +264,22 @@ function MatchingsAggregateContent() {
   const highlightRef = React.useRef<HTMLTableRowElement | null>(null)
 
   React.useEffect(() => {
-    let cancelled = false
+    const ac = new AbortController()
     Promise.all([
-      fetch("/mocks/matchings.json").then((r) => r.json()),
-      fetch("/mocks/users.json").then((r) => r.json()),
-      fetch("/mocks/stats.json").then((r) => r.json()),
+      getMatchings({ signal: ac.signal }),
+      getUsers({ signal: ac.signal }),
+      getStats({ signal: ac.signal }),
     ])
       .then(([m, u, s]) => {
-        if (cancelled) return
-        setMatchings(m)
-        setUsers(u)
-        setStats(s)
+        setMatchings(m as Matching[])
+        setUsers(u as User[])
+        setStats(s as Stats)
       })
       .catch((e: unknown) => {
-        if (!cancelled)
-          setError(e instanceof Error ? e.message : String(e))
+        if (e instanceof Error && e.name === "AbortError") return
+        setError(e instanceof Error ? e.message : String(e))
       })
-    return () => {
-      cancelled = true
-    }
+    return () => ac.abort()
   }, [])
 
   const userById = React.useMemo(() => {

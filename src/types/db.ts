@@ -51,6 +51,104 @@ export interface ApprovedCompanyRow extends RowDataPacket {
 }
 
 // ---------------------------------------------------------------------
+// Stats（KPI 集約）
+// ダッシュボード（/）と /matchings/aggregate が参照する。
+// public/mocks/stats.json と同形だが、現状 DB スキーマで埋められない欄は空配列で返す。
+// ---------------------------------------------------------------------
+export interface ThresholdCompanyDto {
+  company_id: string;                // "co_00001"
+  company_name: string;
+  match_count: number;
+  industry: string;
+  prefecture: string;
+  oldest_request_at: string;         // ISO datetime
+}
+
+export interface UpcomingPublishDto {
+  case_id: string;
+  title: string;
+  company_name: string;
+  publish_at: string;
+  target_industries: string[];
+  target_sales_phases: string[];
+}
+
+export interface StatsDto {
+  summary: {
+    total_users: number;
+    active_users_30d: number;
+    total_matchings: number;
+    pending_matchings: number;
+    approved_matchings: number;
+    total_cases: number;
+    published_cases: number;
+    draft_cases: number;
+    scheduled_publishes: number;
+    total_companies: number;
+    active_companies: number;
+    companies_at_threshold: number;
+    matching_threshold: number;
+    monthly_growth_rate: number;
+  };
+  matchings_by_status: {
+    待機中: number;
+    要対応: number;
+    開催準備中: number;
+    終了: number;
+  };
+  closed_breakdown: Record<string, number>;
+  threshold_companies: ThresholdCompanyDto[];
+  upcoming_publishes: UpcomingPublishDto[];
+  weekly_trend: { week: string; cases: number; matchings: number; new_users: number }[];
+  top_industries: { industry: string; count: number }[];
+  recent_activities: unknown[];
+  generated_at: string;
+}
+
+// ---------------------------------------------------------------------
+// MatchingRequests（マッチング申請）
+// Bot 側 db/schema_v2.sql 準拠
+// ---------------------------------------------------------------------
+export type MatchingDbStatus = "pending" | "queued_for_event" | "closed";
+export type MatchingUiStatus = "待機中" | "要対応" | "開催準備中" | "終了";
+
+export interface MatchingRequestRow extends RowDataPacket {
+  id: number;
+  line_user_id: string;
+  target_approved_company_id: number;
+  source_initiative_id: number | null;
+  status: MatchingDbStatus;
+  requested_at: Date;
+  closed_at: Date | null;
+}
+
+// 管理画面（UI）の Matching 型互換 DTO
+// 注：score / message / closed_reason は現状 DB に対応カラム無し
+//   - score: 0.5 (placeholder)、Phase 7 で AI 計算 or 重み付けロジック導入
+//   - message: 空文字（Bot 側で「話を聞きたい」postback 時に入力 UI を出す改修が必要）
+//   - closed_reason: null（Layer 2 で MatchingRequests.closed_reason カラム追加予定）
+export interface MatchingDto {
+  id: string;                        // "m_0001"
+  case_id: string;                   // "case_0001"
+  case_title: string;
+  applicant_user_id: string;         // line_user_id をそのまま
+  applicant_user_name: string;       // placeholder「LINEユーザー XXXX」
+  applicant_company_id: string;
+  applicant_company_name: string;
+  applicant_position: string;
+  target_company_id: string;
+  target_company_name: string;
+  score: number;                     // 0..1（現状 placeholder 0.5）
+  threshold_flag: boolean;
+  company_total_count: number;
+  status: MatchingUiStatus;
+  closed_reason: string | null;
+  message: string;
+  created_at: string;
+  updated_at: string;
+}
+
+// ---------------------------------------------------------------------
 // Users（LINE ユーザー：オンボーディング状態管理）
 // Bot 側 db/schema_v4.sql 準拠
 // ---------------------------------------------------------------------

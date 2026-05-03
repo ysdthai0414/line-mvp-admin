@@ -48,6 +48,14 @@ import {
   type MatchingStatus,
   type SessionStatus,
 } from "@/lib/status-labels"
+import {
+  getCases,
+  getCurrentStaff,
+  getMatchings,
+  getStats,
+  getUsers,
+  type CurrentStaff,
+} from "@/lib/api-client"
 import { cn } from "@/lib/utils"
 
 // ============================================================
@@ -101,42 +109,33 @@ type Stats = {
   threshold_companies: ThresholdCompany[]
 }
 
-type Staff = {
-  id: string
-  name: string
-  role: string
-}
-
 type Mocks = {
   cases: unknown[]
   matchings: Matching[]
   sessions: Session[]
   users: User[]
   stats: Stats
-  staff: Staff[]
+  me: CurrentStaff | null
 }
 
-async function loadMocks(): Promise<Mocks> {
-  const names = [
-    "cases",
-    "matchings",
-    "sessions",
-    "users",
-    "stats",
-    "staff",
-  ] as const
-  const results = await Promise.all(
-    names.map(async (n) => {
-      const res = await fetch(`/mocks/${n}.json`)
-      if (!res.ok) throw new Error(`failed: /mocks/${n}.json`)
-      return res.json()
-    }),
-  )
-  const [cases, matchings, sessions, users, stats, staff] = results
-  return { cases, matchings, sessions, users, stats, staff }
+async function loadMocks(signal?: AbortSignal): Promise<Mocks> {
+  const sessionsPromise = fetch("/mocks/sessions.json", { signal }).then((r) => {
+    if (!r.ok) throw new Error("failed: /mocks/sessions.json")
+    return r.json()
+  })
+  // Sessions だけは DB に対応テーブル無いため当面 mock を使う。それ以外は実 API。
+  // /api/me が 401 のときは me=null にして greeting を「—」表示にする
+  const meSafe = getCurrentStaff({ signal }).catch(() => null)
+  const [cases, matchings, sessions, users, stats, me] = await Promise.all([
+    getCases({ signal }),
+    getMatchings({ signal }),
+    sessionsPromise,
+    getUsers({ signal }),
+    getStats({ signal }),
+    meSafe,
+  ])
+  return { cases, matchings, sessions, users, stats: stats as Stats, me }
 }
-
-const ME_STAFF_ID = "s_0001" // 仮想ログインスタッフ
 
 // ============================================================
 // Formatters
@@ -862,19 +861,14 @@ export default function DashboardPage() {
   const [error, setError] = React.useState<string | null>(null)
 
   React.useEffect(() => {
-    let cancelled = false
-    loadMocks()
-      .then((d) => {
-        if (!cancelled) setData(d)
-      })
+    const ac = new AbortController()
+    loadMocks(ac.signal)
+      .then((d) => setData(d))
       .catch((e: unknown) => {
-        if (!cancelled) {
-          setError(e instanceof Error ? e.message : String(e))
-        }
+        if (e instanceof Error && e.name === "AbortError") return
+        setError(e instanceof Error ? e.message : String(e))
       })
-    return () => {
-      cancelled = true
-    }
+    return () => ac.abort()
   }, [])
 
   const loading = !data && !error
@@ -910,8 +904,7 @@ export default function DashboardPage() {
         <h1 className="text-3xl font-bold tracking-tight">ダッシュボード</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           お疲れ様です、{(() => {
-            const me = data?.staff?.find((s) => s.id === ME_STAFF_ID)
-            const lastName = me?.name?.split(/\s+/)[0] ?? ""
+            const lastName = data?.me?.name?.split(/\s+/)[0] ?? ""
             return lastName ? `${lastName}さん` : "—"
           })()}
         </p>

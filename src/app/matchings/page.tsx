@@ -54,7 +54,9 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { MatchingsTabs } from "@/components/matchings/matchings-tabs"
+import { getMatchings, getUsers, updateMatchingStatus } from "@/lib/api-client"
 import { Skeleton } from "@/components/ui/skeleton"
+import { toast } from "sonner"
 import {
   Table,
   TableBody,
@@ -238,17 +240,60 @@ function DateRangePicker({
   )
 }
 
+/**
+ * 現在のステータスから遷移可能なステータスのリスト。
+ * 待機中⇔要対応 は DB 上同じ値（pending）で count 依存のため手動遷移は非表示。
+ */
+function availableTransitions(current: string): MatchingStatus[] {
+  if (current === "終了") return ["待機中"]
+  if (current === "開催準備中") return ["待機中", "終了"]
+  return ["開催準備中", "終了"] // 待機中 / 要対応
+}
+
+const TRANSITION_LABELS: Record<MatchingStatus, string> = {
+  待機中: "待機中に戻す",
+  要対応: "要対応に戻す",
+  開催準備中: "開催準備中にする",
+  終了: "終了にする",
+}
+
 function MatchingDetailSheet({
   matching,
   applicantName,
   open,
   onOpenChange,
+  onStatusChanged,
 }: {
   matching: Matching | null
   applicantName: string
   open: boolean
   onOpenChange: (v: boolean) => void
+  onStatusChanged: () => void | Promise<void>
 }) {
+  const [saving, setSaving] = React.useState(false)
+
+  async function handleStatusChange(newStatus: MatchingStatus) {
+    if (!matching || saving) return
+    setSaving(true)
+    const toastId = toast.loading(`ステータスを「${newStatus}」に変更中…`)
+    try {
+      await updateMatchingStatus(matching.id, newStatus)
+      toast.success(`ステータスを「${newStatus}」に変更しました`, { id: toastId })
+      await onStatusChanged()
+    } catch (e) {
+      toast.error(
+        e instanceof Error ? e.message : "ステータス更新に失敗しました",
+        { id: toastId },
+      )
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  const transitions = matching
+    ? availableTransitions(matching.status as string)
+    : []
+
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent className="w-full sm:max-w-md">
@@ -274,13 +319,44 @@ function MatchingDetailSheet({
               <dt className="text-muted-foreground">対象事例</dt>
               <dd>{matching.case_title}</dd>
             </dl>
-            <div>
-              <p className="mb-1 text-xs font-medium text-muted-foreground">
-                メッセージ
+            {matching.message && (
+              <div>
+                <p className="mb-1 text-xs font-medium text-muted-foreground">
+                  メッセージ
+                </p>
+                <p className="rounded-md border bg-muted/30 p-3 text-sm">
+                  {matching.message}
+                </p>
+              </div>
+            )}
+
+            {/* ---- ステータス変更アクション ---- */}
+            <div className="space-y-2 rounded-md border bg-muted/20 p-3">
+              <p className="text-xs font-medium text-muted-foreground">
+                ステータス変更
               </p>
-              <p className="rounded-md border bg-muted/30 p-3 text-sm">
-                {matching.message}
-              </p>
+              {transitions.length === 0 ? (
+                <p className="text-xs text-muted-foreground">
+                  この状態から変更できる遷移はありません
+                </p>
+              ) : (
+                <div className="flex flex-wrap gap-2">
+                  {transitions.map((s) => (
+                    <Button
+                      key={s}
+                      size="sm"
+                      variant={s === "終了" ? "destructive" : "default"}
+                      disabled={saving}
+                      onClick={() => handleStatusChange(s)}
+                    >
+                      {saving && (
+                        <Loader2 className="size-3.5 animate-spin" />
+                      )}
+                      {TRANSITION_LABELS[s]}
+                    </Button>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -310,25 +386,29 @@ function MatchingsListContent() {
   )
   const [sheetOpen, setSheetOpen] = React.useState(false)
 
-  React.useEffect(() => {
-    let cancelled = false
-    Promise.all([
-      fetch("/mocks/matchings.json").then((r) => r.json()),
-      fetch("/mocks/users.json").then((r) => r.json()),
-    ])
-      .then(([m, u]) => {
-        if (cancelled) return
-        setMatchings(m)
-        setUsers(u)
-      })
-      .catch((e: unknown) => {
-        if (!cancelled)
-          setError(e instanceof Error ? e.message : String(e))
-      })
-    return () => {
-      cancelled = true
+  const loadData = React.useCallback(async (signal?: AbortSignal) => {
+    try {
+      const [m, u] = await Promise.all([
+        getMatchings({ signal }),
+        getUsers({ signal }),
+      ])
+      setMatchings(m as Matching[])
+      setUsers(u as User[])
+      // 詳細シートで開いている matching があれば、新しいデータの同 id 行で差し替え
+      setSheetMatching((prev) =>
+        prev ? (m as Matching[]).find((x) => x.id === prev.id) ?? null : null,
+      )
+    } catch (e: unknown) {
+      if (e instanceof Error && e.name === "AbortError") return
+      setError(e instanceof Error ? e.message : String(e))
     }
   }, [])
+
+  React.useEffect(() => {
+    const ac = new AbortController()
+    loadData(ac.signal)
+    return () => ac.abort()
+  }, [loadData])
 
   const userById = React.useMemo(() => {
     const map = new Map<string, User>()
@@ -567,6 +647,7 @@ function MatchingsListContent() {
         }
         open={sheetOpen}
         onOpenChange={setSheetOpen}
+        onStatusChanged={() => loadData()}
       />
     </div>
   )
