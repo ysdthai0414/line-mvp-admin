@@ -1,0 +1,217 @@
+/* ============================================================
+ * YNMO 100億宣言支援AI 管理コンソール
+ * Design Tokens / globals.css (Tailwind v4)
+ *
+ * Base color: #1F4E79 （HSL: 210, 60%, 30%）
+ * 仕様: Tailwind v4 の CSS-first 構成。
+ *   - `@theme inline` でユーティリティ名へ露出
+ *   - `:root` / `.dark` に oklch 値を定義
+ * ============================================================ */
+
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* ---- shadcn/ui semantic tokens ---- */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* ---- Primary palette 50–900 (#1F4E79 ベース, hue ≈ 243) ---- */
+  --color-primary-50: var(--primary-50);
+  --color-primary-100: var(--primary-100);
+  --color-primary-200: var(--primary-200);
+  --color-primary-300: var(--primary-300);
+  --color-primary-400: var(--primary-400);
+  --color-primary-500: var(--primary-500);
+  --color-primary-600: var(--primary-600);
+  --color-primary-700: var(--primary-700);
+  --color-primary-800: var(--primary-800);
+  --color-primary-900: var(--primary-900);
+
+  /* ---- Chart / Sidebar (shadcn 既定の互換) ---- */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* ---- Typography ---- */
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-heading: var(--font-sans);
+
+  /* ---- Radius ---- */
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+
+  /* ---- Layout ---- */
+  --spacing-sidebar: var(--sidebar-width);
+  --spacing-sidebar-collapsed: var(--sidebar-width-collapsed);
+  --spacing-topbar: var(--topbar-height);
+}
+
+:root {
+  /* ---------- Surface ---------- */
+  --background:           oklch(1 0 0);
+  --foreground:           oklch(0.18 0.040 243);
+  --card:                 oklch(1 0 0);
+  --card-foreground:      oklch(0.18 0.040 243);
+  --popover:              oklch(1 0 0);
+  --popover-foreground:   oklch(0.18 0.040 243);
+
+  /* ---------- Primary (#1F4E79 系。hue 243 ≒ HSL hue 210) ---------- */
+  --primary:              oklch(0.40 0.090 243);   /* = #1F4E79 */
+  --primary-foreground:   oklch(1 0 0);
+  --primary-50:           oklch(0.97 0.013 243);
+  --primary-100:          oklch(0.92 0.030 243);
+  --primary-200:          oklch(0.83 0.060 243);
+  --primary-300:          oklch(0.71 0.095 243);
+  --primary-400:          oklch(0.55 0.115 243);
+  --primary-500:          oklch(0.40 0.090 243);   /* = #1F4E79 */
+  --primary-600:          oklch(0.34 0.080 243);
+  --primary-700:          oklch(0.28 0.070 243);
+  --primary-800:          oklch(0.22 0.055 243);
+  --primary-900:          oklch(0.16 0.040 243);
+
+  /* ---------- Secondary / Accent ---------- */
+  --secondary:            oklch(0.97 0.008 243);
+  --secondary-foreground: oklch(0.28 0.070 243);
+  --accent:               oklch(0.74 0.135 70);    /* gold */
+  --accent-foreground:    oklch(1 0 0);
+
+  /* ---------- 状態色 ---------- */
+  --success:              oklch(0.55 0.155 145);
+  --success-foreground:   oklch(1 0 0);
+  --warning:              oklch(0.74 0.165 65);
+  --warning-foreground:   oklch(0.18 0 0);
+  --destructive:          oklch(0.58 0.220 27);
+  --destructive-foreground: oklch(1 0 0);
+  --info:                 oklch(0.66 0.150 220);
+  --info-foreground:      oklch(1 0 0);
+
+  /* ---------- Neutral surfaces ---------- */
+  --muted:                oklch(0.97 0.006 243);
+  --muted-foreground:     oklch(0.50 0.025 243);
+  --border:               oklch(0.90 0.015 243);
+  --input:                oklch(0.90 0.015 243);
+  --ring:                 oklch(0.40 0.090 243);
+
+  /* ---------- Chart palette ---------- */
+  --chart-1:              oklch(0.40 0.090 243);   /* primary */
+  --chart-2:              oklch(0.74 0.135 70);    /* accent */
+  --chart-3:              oklch(0.55 0.155 145);   /* success */
+  --chart-4:              oklch(0.74 0.165 65);    /* warning */
+  --chart-5:              oklch(0.66 0.150 220);   /* info */
+
+  /* ---------- Sidebar (Joli Admin 風ダーク。light/dark 共通) ---------- */
+  --sidebar:                       oklch(0.20 0.060 243);
+  --sidebar-foreground:            oklch(0.96 0.008 243);
+  --sidebar-primary:               oklch(0.66 0.130 243);
+  --sidebar-primary-foreground:    oklch(1 0 0);
+  --sidebar-accent:                oklch(0.30 0.060 243);
+  --sidebar-accent-foreground:     oklch(0.96 0.008 243);
+  --sidebar-border:                oklch(0.30 0.060 243);
+  --sidebar-ring:                  oklch(0.66 0.130 243);
+
+  /* ---------- Typography ---------- */
+  --font-sans: "Inter", "Noto Sans JP", "Yu Gothic", "Hiragino Sans",
+               "Meiryo", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "Menlo", "Consolas", monospace;
+
+  /* ---------- Radius ---------- */
+  --radius: 0.5rem;
+
+  /* ---------- Layout ---------- */
+  --sidebar-width:           240px;
+  --sidebar-width-collapsed: 64px;
+  --topbar-height:           56px;
+  --content-max-width:       1440px;
+}
+
+.dark {
+  --background:           oklch(0.16 0.025 243);
+  --foreground:           oklch(0.96 0.008 243);
+  --card:                 oklch(0.21 0.025 243);
+  --card-foreground:      oklch(0.96 0.008 243);
+  --popover:              oklch(0.21 0.025 243);
+  --popover-foreground:   oklch(0.96 0.008 243);
+
+  --primary:              oklch(0.66 0.130 243);
+  --primary-foreground:   oklch(0.18 0.040 243);
+  --secondary:            oklch(0.27 0.020 243);
+  --secondary-foreground: oklch(0.96 0.008 243);
+  --muted:                oklch(0.27 0.020 243);
+  --muted-foreground:     oklch(0.68 0.020 243);
+  --accent:               oklch(0.74 0.135 70);
+  --accent-foreground:    oklch(0.18 0 0);
+
+  --border:               oklch(0.31 0.025 243);
+  --input:                oklch(0.31 0.025 243);
+  --ring:                 oklch(0.66 0.130 243);
+
+  --sidebar:                       oklch(0.20 0.060 243);
+  --sidebar-foreground:            oklch(0.96 0.008 243);
+  --sidebar-primary:               oklch(0.66 0.130 243);
+  --sidebar-primary-foreground:    oklch(1 0 0);
+  --sidebar-accent:                oklch(0.30 0.060 243);
+  --sidebar-accent-foreground:     oklch(0.96 0.008 243);
+  --sidebar-border:                oklch(0.30 0.060 243);
+  --sidebar-ring:                  oklch(0.66 0.130 243);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "palt", "ss01";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+}

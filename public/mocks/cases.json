@@ -1,0 +1,307 @@
+[
+  {
+    "id": "case_0001",
+    "title": "地域密着型DX推進プロジェクト",
+    "company_id": "co_02768",
+    "company_name": "近藤サービス株式会社",
+    "author_id": "u_0010",
+    "status": "scheduled",
+    "thumbnail_url": "https://picsum.photos/seed/case0001/640/360",
+    "summary": "近藤サービス株式会社による地域密着型DX推進プロジェクトの概要。100億宣言達成に向けた具体的な施策をまとめた事例です。",
+    "content": "## 背景\n秋田県に拠点を置く近藤サービス株式会社（宿泊・飲食サービス業）が取り組んだ地域密着型DX推進プロジェクトの詳細記録です。\n\n## 取り組み内容\n- 経営層を巻き込んだ全社横断プロジェクトを発足\n- 段階的なKPI設定とPDCAサイクルの確立\n- 外部専門家との連携強化\n\n## 成果\n売上前年比 +27%、生産性 +27% を達成。",
+    "tags": [
+      "BCP",
+      "新規事業",
+      "AI",
+      "海外展開"
+    ],
+    "pdf_url": "https://example.com/cases/case_0001.pdf",
+    "created_at": "2026-03-02T09:10:00+09:00",
+    "updated_at": "2026-03-19T09:10:00+09:00",
+    "publish_at": "2026-05-11T15:00:00+09:00",
+    "target_industries": [
+      "運輸業・郵便業",
+      "製造業",
+      "分類不能の産業"
+    ],
+    "target_sales_phases": [
+      "02_10〜20億",
+      "07_100億以上"
+    ],
+    "pdf_filename": "case_0001_takagi_jirei.pdf",
+    "upload_at": "2026-03-17T09:10:00+09:00"
+  },
+  {
+    "id": "case_0002",
+    "title": "中小企業向けAI導入支援",
+    "company_id": "co_00848",
+    "company_name": "伊藤ホールディングス合同会社",
+    "author_id": "u_0007",
+    "status": "published",
+    "thumbnail_url": "https://picsum.photos/seed/case0002/640/360",
+    "summary": "伊藤ホールディングス合同会社による中小企業向けAI導入支援の概要。100億宣言達成に向けた具体的な施策をまとめた事例です。",
+    "content": "## 背景\n島根県に拠点を置く伊藤ホールディングス合同会社（金融・保険業）が取り組んだ中小企業向けAI導入支援の詳細記録です。\n\n## 取り組み内容\n- 経営層を巻き込んだ全社横断プロジェクトを発足\n- 段階的なKPI設定とPDCAサイクルの確立\n- 外部専門家との連携強化\n\n## 成果\n売上前年比 +14%、生産性 +38% を達成。",
+    "tags": [
+      "顧客体験",
+      "サステナビリティ",
+      "DX"
+    ],
+    "pdf_url": "https://example.com/cases/case_0002.pdf",
+    "created_at": "2026-04-17T23:20:00+09:00",
+    "updated_at": "2026-05-09T23:20:00+09:00",
+    "publish_at": null,
+    "target_industries": [
+      "運輸業・郵便業",
+      "建設業",
+      "生活関連サービス業・娯楽業"
+    ],
+    "target_sales_phases": [
+      "01_〜10億未満",
+      "07_100億以上"
+    ],
+    "pdf_filename": "case_0002_takagi_jirei.pdf",
+    "upload_at": "2026-05-08T23:20:00+09:00"
+  },
+  {
+    "id": "case_0003",
+    "title": "サプライチェーン最適化の取り組み",
+    "company_id": "co_02304",
+    "company_name": "山本テクノロジーズ株式会社",
+    "author_id": "u_0006",
+    "status": "published",
+    "thumbnail_url": "https://picsum.photos/seed/case0003/640/360",
+    "summary": "山本テクノロジーズ株式会社によるサプライチェーン最適化の取り組みの概要。100億宣言達成に向けた具体的な施策をまとめた事例です。",
+    "content": "## 背景\n広島県に拠点を置く山本テクノロジーズ株式会社（建設業）が取り組んだサプライチェーン最適化の取り組みの詳細記録です。\n\n## 取り組み内容\n- 経営層を巻き込んだ全社横断プロジェクトを発足\n- 段階的なKPI設定とPDCAサイクルの確立\n- 外部専門家との連携強化\n\n## 成果\n売上前年比 +8%、生産性 +37% を達成。",
+    "tags": [
+      "サステナビリティ",
+      "業務効率化"
+    ],
+    "pdf_url": "https://example.com/cases/case_0003.pdf",
+    "created_at": "2026-02-25T01:24:00+09:00",
+    "updated_at": "2026-03-20T01:24:00+09:00",
+    "publish_at": null,
+    "target_industries": [
+      "不動産業・物品賃貸業"
+    ],
+    "target_sales_phases": [
+      "05_50〜70億",
+      "01_〜10億未満",
+      "07_100億以上"
+    ],
+    "pdf_filename": "case_0003_takagi_jirei.pdf",
+    "upload_at": "2026-03-18T01:24:00+09:00"
+  },
+  {
+    "id": "case_0004",
+    "title": "リモートワーク環境整備プログラム",
+    "company_id": "co_02547",
+    "company_name": "中村製作所株式会社",
+    "author_id": "u_0006",
+    "status": "scheduled",
+    "thumbnail_url": "https://picsum.photos/seed/case0004/640/360",
+    "summary": "中村製作所株式会社によるリモートワーク環境整備プログラムの概要。100億宣言達成に向けた具体的な施策をまとめた事例です。",
+    "content": "## 背景\n北海道に拠点を置く中村製作所株式会社（卸売・小売業）が取り組んだリモートワーク環境整備プログラムの詳細記録です。\n\n## 取り組み内容\n- 経営層を巻き込んだ全社横断プロジェクトを発足\n- 段階的なKPI設定とPDCAサイクルの確立\n- 外部専門家との連携強化\n\n## 成果\n売上前年比 +16%、生産性 +11% を達成。",
+    "tags": [
+      "DX",
+      "AI",
+      "コスト削減",
+      "サステナビリティ"
+    ],
+    "pdf_url": "https://example.com/cases/case_0004.pdf",
+    "created_at": "2026-01-12T07:02:00+09:00",
+    "updated_at": "2026-01-31T07:02:00+09:00",
+    "publish_at": "2026-05-02T07:00:00+09:00",
+    "target_industries": [
+      "農業・林業",
+      "不動産業・物品賃貸業",
+      "鉱業・採石業・砂利採取業"
+    ],
+    "target_sales_phases": [
+      "03_20〜30億",
+      "01_〜10億未満",
+      "02_10〜20億"
+    ],
+    "pdf_filename": "case_0004_takagi_jirei.pdf",
+    "upload_at": "2026-01-27T07:02:00+09:00"
+  },
+  {
+    "id": "case_0005",
+    "title": "若手人材育成・リスキリング施策",
+    "company_id": "co_01196",
+    "company_name": "斎藤合同会社",
+    "author_id": "u_0007",
+    "status": "published",
+    "thumbnail_url": "https://picsum.photos/seed/case0005/640/360",
+    "summary": "斎藤合同会社による若手人材育成・リスキリング施策の概要。100億宣言達成に向けた具体的な施策をまとめた事例です。",
+    "content": "## 背景\n徳島県に拠点を置く斎藤合同会社（教育・学習支援業）が取り組んだ若手人材育成・リスキリング施策の詳細記録です。\n\n## 取り組み内容\n- 経営層を巻き込んだ全社横断プロジェクトを発足\n- 段階的なKPI設定とPDCAサイクルの確立\n- 外部専門家との連携強化\n\n## 成果\n売上前年比 +27%、生産性 +32% を達成。",
+    "tags": [
+      "DX",
+      "コスト削減",
+      "顧客体験",
+      "AI"
+    ],
+    "pdf_url": "https://example.com/cases/case_0005.pdf",
+    "created_at": "2026-04-04T18:38:00+09:00",
+    "updated_at": "2026-04-30T18:38:00+09:00",
+    "publish_at": null,
+    "target_industries": [
+      "学術研究・専門・技術サービス業",
+      "サービス業_他に分類されないもの"
+    ],
+    "target_sales_phases": [
+      "07_100億以上"
+    ],
+    "pdf_filename": "case_0005_takagi_jirei.pdf",
+    "upload_at": "2026-04-27T18:38:00+09:00"
+  },
+  {
+    "id": "case_0006",
+    "title": "脱炭素経営への転換事例",
+    "company_id": "co_02146",
+    "company_name": "阿部工業株式会社",
+    "author_id": "u_0009",
+    "status": "scheduled",
+    "thumbnail_url": "https://picsum.photos/seed/case0006/640/360",
+    "summary": "阿部工業株式会社による脱炭素経営への転換事例の概要。100億宣言達成に向けた具体的な施策をまとめた事例です。",
+    "content": "## 背景\n奈良県に拠点を置く阿部工業株式会社（運輸・郵便業）が取り組んだ脱炭素経営への転換事例の詳細記録です。\n\n## 取り組み内容\n- 経営層を巻き込んだ全社横断プロジェクトを発足\n- 段階的なKPI設定とPDCAサイクルの確立\n- 外部専門家との連携強化\n\n## 成果\n売上前年比 +14%、生産性 +18% を達成。",
+    "tags": [
+      "AI",
+      "DX",
+      "業務効率化",
+      "コスト削減"
+    ],
+    "pdf_url": "https://example.com/cases/case_0006.pdf",
+    "created_at": "2026-02-04T13:12:00+09:00",
+    "updated_at": "2026-02-28T13:12:00+09:00",
+    "publish_at": "2026-05-03T08:00:00+09:00",
+    "target_industries": [
+      "建設業"
+    ],
+    "target_sales_phases": [
+      "01_〜10億未満",
+      "03_20〜30億"
+    ],
+    "pdf_filename": "case_0006_takagi_jirei.pdf",
+    "upload_at": "2026-02-25T13:12:00+09:00"
+  },
+  {
+    "id": "case_0007",
+    "title": "業務自動化（RPA）導入プロジェクト",
+    "company_id": "co_01114",
+    "company_name": "西村コーポレーション有限会社",
+    "author_id": "u_0004",
+    "status": "archived",
+    "thumbnail_url": "https://picsum.photos/seed/case0007/640/360",
+    "summary": "西村コーポレーション有限会社による業務自動化（RPA）導入プロジェクトの概要。100億宣言達成に向けた具体的な施策をまとめた事例です。",
+    "content": "## 背景\n福島県に拠点を置く西村コーポレーション有限会社（不動産業）が取り組んだ業務自動化（RPA）導入プロジェクトの詳細記録です。\n\n## 取り組み内容\n- 経営層を巻き込んだ全社横断プロジェクトを発足\n- 段階的なKPI設定とPDCAサイクルの確立\n- 外部専門家との連携強化\n\n## 成果\n売上前年比 +15%、生産性 +12% を達成。",
+    "tags": [
+      "人材育成",
+      "海外展開",
+      "顧客体験",
+      "業務効率化"
+    ],
+    "pdf_url": "https://example.com/cases/case_0007.pdf",
+    "created_at": "2026-04-10T22:35:00+09:00",
+    "updated_at": "2026-04-23T22:35:00+09:00",
+    "publish_at": null,
+    "target_industries": [
+      "学術研究・専門・技術サービス業",
+      "卸売業・小売業",
+      "分類不能の産業"
+    ],
+    "target_sales_phases": [
+      "05_50〜70億",
+      "01_〜10億未満"
+    ],
+    "pdf_filename": "case_0007_takagi_jirei.pdf",
+    "upload_at": "2026-04-19T22:35:00+09:00"
+  },
+  {
+    "id": "case_0008",
+    "title": "顧客データ統合プラットフォーム構築",
+    "company_id": "co_02599",
+    "company_name": "長谷川サービス有限会社",
+    "author_id": "u_0002",
+    "status": "published",
+    "thumbnail_url": "https://picsum.photos/seed/case0008/640/360",
+    "summary": "長谷川サービス有限会社による顧客データ統合プラットフォーム構築の概要。100億宣言達成に向けた具体的な施策をまとめた事例です。",
+    "content": "## 背景\n滋賀県に拠点を置く長谷川サービス有限会社（製造業）が取り組んだ顧客データ統合プラットフォーム構築の詳細記録です。\n\n## 取り組み内容\n- 経営層を巻き込んだ全社横断プロジェクトを発足\n- 段階的なKPI設定とPDCAサイクルの確立\n- 外部専門家との連携強化\n\n## 成果\n売上前年比 +19%、生産性 +20% を達成。",
+    "tags": [
+      "コスト削減",
+      "DX",
+      "人材育成"
+    ],
+    "pdf_url": "https://example.com/cases/case_0008.pdf",
+    "created_at": "2026-03-14T17:19:00+09:00",
+    "updated_at": "2026-03-21T17:19:00+09:00",
+    "publish_at": null,
+    "target_industries": [
+      "生活関連サービス業・娯楽業"
+    ],
+    "target_sales_phases": [
+      "05_50〜70億",
+      "03_20〜30億",
+      "07_100億以上"
+    ],
+    "pdf_filename": "case_0008_takagi_jirei.pdf",
+    "upload_at": "2026-03-19T17:19:00+09:00"
+  },
+  {
+    "id": "case_0009",
+    "title": "100億宣言達成までのロードマップ策定",
+    "company_id": "co_00173",
+    "company_name": "村上産業合同会社",
+    "author_id": "u_0010",
+    "status": "draft",
+    "thumbnail_url": "https://picsum.photos/seed/case0009/640/360",
+    "summary": "村上産業合同会社による100億宣言達成までのロードマップ策定の概要。100億宣言達成に向けた具体的な施策をまとめた事例です。",
+    "content": "## 背景\n三重県に拠点を置く村上産業合同会社（宿泊・飲食サービス業）が取り組んだ100億宣言達成までのロードマップ策定の詳細記録です。\n\n## 取り組み内容\n- 経営層を巻き込んだ全社横断プロジェクトを発足\n- 段階的なKPI設定とPDCAサイクルの確立\n- 外部専門家との連携強化\n\n## 成果\n売上前年比 +15%、生産性 +22% を達成。",
+    "tags": [
+      "新規事業",
+      "AI",
+      "顧客体験"
+    ],
+    "pdf_url": "https://example.com/cases/case_0009.pdf",
+    "created_at": "2026-01-28T09:54:00+09:00",
+    "updated_at": "2026-02-27T09:54:00+09:00",
+    "publish_at": null,
+    "target_industries": [
+      "建設業",
+      "卸売業・小売業",
+      "医療・福祉"
+    ],
+    "target_sales_phases": [
+      "07_100億以上"
+    ],
+    "pdf_filename": "case_0009_takagi_jirei.pdf",
+    "upload_at": "2026-02-24T09:54:00+09:00"
+  },
+  {
+    "id": "case_0010",
+    "title": "海外市場進出に向けた基盤整備",
+    "company_id": "co_01847",
+    "company_name": "遠藤テクノロジーズ合同会社",
+    "author_id": "u_0009",
+    "status": "draft",
+    "thumbnail_url": "https://picsum.photos/seed/case0010/640/360",
+    "summary": "遠藤テクノロジーズ合同会社による海外市場進出に向けた基盤整備の概要。100億宣言達成に向けた具体的な施策をまとめた事例です。",
+    "content": "## 背景\n岩手県に拠点を置く遠藤テクノロジーズ合同会社（卸売・小売業）が取り組んだ海外市場進出に向けた基盤整備の詳細記録です。\n\n## 取り組み内容\n- 経営層を巻き込んだ全社横断プロジェクトを発足\n- 段階的なKPI設定とPDCAサイクルの確立\n- 外部専門家との連携強化\n\n## 成果\n売上前年比 +9%、生産性 +38% を達成。",
+    "tags": [
+      "AI",
+      "BCP",
+      "人材育成"
+    ],
+    "pdf_url": "https://example.com/cases/case_0010.pdf",
+    "created_at": "2026-03-17T08:55:00+09:00",
+    "updated_at": "2026-04-16T08:55:00+09:00",
+    "publish_at": null,
+    "target_industries": [
+      "不動産業・物品賃貸業"
+    ],
+    "target_sales_phases": [
+      "04_30〜50億"
+    ],
+    "pdf_filename": "case_0010_takagi_jirei.pdf",
+    "upload_at": "2026-04-13T08:55:00+09:00"
+  }
+]

@@ -1,0 +1,398 @@
+[
+  {
+    "id": "s_0001",
+    "title": "100億宣言キックオフ相談会",
+    "host_user_id": "s_0001",
+    "host_user_name": "小野寺 香織",
+    "scheduled_at": "2026-03-30T12:00:00+09:00",
+    "duration_min": 45,
+    "attendees": [
+      {
+        "user_id": "u_0003",
+        "user_name": "鈴木 翔",
+        "company_name": "株式会社アクセサリーマルタカ",
+        "position": "経営企画室長"
+      },
+      {
+        "user_id": "u_0009",
+        "user_name": "吉田 健",
+        "company_name": "株式会社丸金商会",
+        "position": "代表取締役 社長"
+      },
+      {
+        "user_id": "u_0004",
+        "user_name": "高橋 由紀",
+        "company_name": "株式会社アイザワ",
+        "position": "DX推進担当"
+      },
+      {
+        "user_id": "u_0002",
+        "user_name": "佐藤 美咲",
+        "company_name": "福田刃物工業株式会社",
+        "position": "総務部長"
+      },
+      {
+        "user_id": "u_0008",
+        "user_name": "加藤 早苗",
+        "company_name": "ダイワ販売株式会社",
+        "position": "営業統括"
+      },
+      {
+        "user_id": "u_0006",
+        "user_name": "林 千尋",
+        "company_name": "清峰金属工業株式会社",
+        "position": "代表取締役 社長"
+      },
+      {
+        "user_id": "u_0010",
+        "user_name": "山田 智子",
+        "company_name": "夏目光学株式会社",
+        "position": "経営企画部長"
+      }
+    ],
+    "status": "completed",
+    "notes": "参加者へ事前資料を共有済み。当日のアジェンダは別途送付。"
+  },
+  {
+    "id": "s_0002",
+    "title": "DX推進フォローアップ",
+    "host_user_id": "s_0002",
+    "host_user_name": "丸山 よしこ",
+    "scheduled_at": "2026-04-08T08:00:00+09:00",
+    "duration_min": 60,
+    "attendees": [
+      {
+        "user_id": "u_0006",
+        "user_name": "林 千尋",
+        "company_name": "清峰金属工業株式会社",
+        "position": "代表取締役 社長"
+      },
+      {
+        "user_id": "u_0001",
+        "user_name": "田中 健太",
+        "company_name": "中国ゴム工業株式会社",
+        "position": "代表取締役"
+      },
+      {
+        "user_id": "u_0004",
+        "user_name": "高橋 由紀",
+        "company_name": "株式会社アイザワ",
+        "position": "DX推進担当"
+      },
+      {
+        "user_id": "u_0007",
+        "user_name": "石田 一郎",
+        "company_name": "インプルーブ株式会社",
+        "position": "代表取締役 社長"
+      },
+      {
+        "user_id": "u_0009",
+        "user_name": "吉田 健",
+        "company_name": "株式会社丸金商会",
+        "position": "代表取締役 社長"
+      },
+      {
+        "user_id": "u_0003",
+        "user_name": "鈴木 翔",
+        "company_name": "株式会社アクセサリーマルタカ",
+        "position": "経営企画室長"
+      },
+      {
+        "user_id": "u_0008",
+        "user_name": "加藤 早苗",
+        "company_name": "ダイワ販売株式会社",
+        "position": "営業統括"
+      },
+      {
+        "user_id": "u_0002",
+        "user_name": "佐藤 美咲",
+        "company_name": "福田刃物工業株式会社",
+        "position": "総務部長"
+      }
+    ],
+    "status": "completed",
+    "notes": "参加者へ事前資料を共有済み。当日のアジェンダは別途送付。"
+  },
+  {
+    "id": "s_0003",
+    "title": "海外展開パイロット相談会",
+    "host_user_id": "s_0001",
+    "host_user_name": "小野寺 香織",
+    "scheduled_at": "2026-05-23T15:00:00+09:00",
+    "duration_min": 90,
+    "attendees": [
+      {
+        "user_id": "u_0010",
+        "user_name": "山田 智子",
+        "company_name": "夏目光学株式会社",
+        "position": "経営企画部長"
+      },
+      {
+        "user_id": "u_0006",
+        "user_name": "林 千尋",
+        "company_name": "清峰金属工業株式会社",
+        "position": "代表取締役 社長"
+      },
+      {
+        "user_id": "u_0004",
+        "user_name": "高橋 由紀",
+        "company_name": "株式会社アイザワ",
+        "position": "DX推進担当"
+      },
+      {
+        "user_id": "u_0009",
+        "user_name": "吉田 健",
+        "company_name": "株式会社丸金商会",
+        "position": "代表取締役 社長"
+      }
+    ],
+    "status": "cancelled",
+    "notes": "主催者都合により中止"
+  },
+  {
+    "id": "s_0004",
+    "title": "人材育成プログラム個別相談",
+    "host_user_id": "s_0004",
+    "host_user_name": "高橋 由佳",
+    "scheduled_at": "2026-04-23T10:00:00+09:00",
+    "duration_min": 60,
+    "attendees": [
+      {
+        "user_id": "u_0008",
+        "user_name": "加藤 早苗",
+        "company_name": "ダイワ販売株式会社",
+        "position": "営業統括"
+      },
+      {
+        "user_id": "u_0003",
+        "user_name": "鈴木 翔",
+        "company_name": "株式会社アクセサリーマルタカ",
+        "position": "経営企画室長"
+      },
+      {
+        "user_id": "u_0005",
+        "user_name": "中村 拓海",
+        "company_name": "ケア・ルートサービス株式会社",
+        "position": "営業統括"
+      },
+      {
+        "user_id": "u_0002",
+        "user_name": "佐藤 美咲",
+        "company_name": "福田刃物工業株式会社",
+        "position": "総務部長"
+      },
+      {
+        "user_id": "u_0007",
+        "user_name": "石田 一郎",
+        "company_name": "インプルーブ株式会社",
+        "position": "代表取締役 社長"
+      },
+      {
+        "user_id": "u_0010",
+        "user_name": "山田 智子",
+        "company_name": "夏目光学株式会社",
+        "position": "経営企画部長"
+      }
+    ],
+    "status": "completed",
+    "notes": "参加者へ事前資料を共有済み。当日のアジェンダは別途送付。"
+  },
+  {
+    "id": "s_0005",
+    "title": "サステナビリティ経営ワークショップ",
+    "host_user_id": "s_0003",
+    "host_user_name": "鈴木 隆",
+    "scheduled_at": "2026-05-07T14:00:00+09:00",
+    "duration_min": 60,
+    "attendees": [
+      {
+        "user_id": "u_0010",
+        "user_name": "山田 智子",
+        "company_name": "夏目光学株式会社",
+        "position": "経営企画部長"
+      },
+      {
+        "user_id": "u_0007",
+        "user_name": "石田 一郎",
+        "company_name": "インプルーブ株式会社",
+        "position": "代表取締役 社長"
+      },
+      {
+        "user_id": "u_0009",
+        "user_name": "吉田 健",
+        "company_name": "株式会社丸金商会",
+        "position": "代表取締役 社長"
+      },
+      {
+        "user_id": "u_0003",
+        "user_name": "鈴木 翔",
+        "company_name": "株式会社アクセサリーマルタカ",
+        "position": "経営企画室長"
+      },
+      {
+        "user_id": "u_0002",
+        "user_name": "佐藤 美咲",
+        "company_name": "福田刃物工業株式会社",
+        "position": "総務部長"
+      },
+      {
+        "user_id": "u_0006",
+        "user_name": "林 千尋",
+        "company_name": "清峰金属工業株式会社",
+        "position": "代表取締役 社長"
+      },
+      {
+        "user_id": "u_0004",
+        "user_name": "高橋 由紀",
+        "company_name": "株式会社アイザワ",
+        "position": "DX推進担当"
+      },
+      {
+        "user_id": "u_0001",
+        "user_name": "田中 健太",
+        "company_name": "中国ゴム工業株式会社",
+        "position": "代表取締役"
+      }
+    ],
+    "status": "scheduled",
+    "notes": "参加者へ事前資料を共有済み。当日のアジェンダは別途送付。"
+  },
+  {
+    "id": "s_0006",
+    "title": "業界別マッチング会（製造業）",
+    "host_user_id": "s_0001",
+    "host_user_name": "小野寺 香織",
+    "scheduled_at": "2026-04-09T09:00:00+09:00",
+    "duration_min": 90,
+    "attendees": [
+      {
+        "user_id": "u_0003",
+        "user_name": "鈴木 翔",
+        "company_name": "株式会社アクセサリーマルタカ",
+        "position": "経営企画室長"
+      },
+      {
+        "user_id": "u_0010",
+        "user_name": "山田 智子",
+        "company_name": "夏目光学株式会社",
+        "position": "経営企画部長"
+      },
+      {
+        "user_id": "u_0007",
+        "user_name": "石田 一郎",
+        "company_name": "インプルーブ株式会社",
+        "position": "代表取締役 社長"
+      }
+    ],
+    "status": "completed",
+    "notes": "参加者へ事前資料を共有済み。当日のアジェンダは別途送付。"
+  },
+  {
+    "id": "s_0007",
+    "title": "業界別マッチング会（IT）",
+    "host_user_id": "s_0001",
+    "host_user_name": "小野寺 香織",
+    "scheduled_at": "2026-05-13T07:00:00+09:00",
+    "duration_min": 30,
+    "attendees": [
+      {
+        "user_id": "u_0007",
+        "user_name": "石田 一郎",
+        "company_name": "インプルーブ株式会社",
+        "position": "代表取締役 社長"
+      },
+      {
+        "user_id": "u_0008",
+        "user_name": "加藤 早苗",
+        "company_name": "ダイワ販売株式会社",
+        "position": "営業統括"
+      },
+      {
+        "user_id": "u_0005",
+        "user_name": "中村 拓海",
+        "company_name": "ケア・ルートサービス株式会社",
+        "position": "営業統括"
+      },
+      {
+        "user_id": "u_0009",
+        "user_name": "吉田 健",
+        "company_name": "株式会社丸金商会",
+        "position": "代表取締役 社長"
+      },
+      {
+        "user_id": "u_0001",
+        "user_name": "田中 健太",
+        "company_name": "中国ゴム工業株式会社",
+        "position": "代表取締役"
+      },
+      {
+        "user_id": "u_0006",
+        "user_name": "林 千尋",
+        "company_name": "清峰金属工業株式会社",
+        "position": "代表取締役 社長"
+      }
+    ],
+    "status": "cancelled",
+    "notes": "主催者都合により中止"
+  },
+  {
+    "id": "s_0008",
+    "title": "Q2成果発表＆ふりかえり",
+    "host_user_id": "s_0003",
+    "host_user_name": "鈴木 隆",
+    "scheduled_at": "2026-03-31T10:00:00+09:00",
+    "duration_min": 60,
+    "attendees": [
+      {
+        "user_id": "u_0006",
+        "user_name": "林 千尋",
+        "company_name": "清峰金属工業株式会社",
+        "position": "代表取締役 社長"
+      },
+      {
+        "user_id": "u_0002",
+        "user_name": "佐藤 美咲",
+        "company_name": "福田刃物工業株式会社",
+        "position": "総務部長"
+      },
+      {
+        "user_id": "u_0005",
+        "user_name": "中村 拓海",
+        "company_name": "ケア・ルートサービス株式会社",
+        "position": "営業統括"
+      },
+      {
+        "user_id": "u_0004",
+        "user_name": "高橋 由紀",
+        "company_name": "株式会社アイザワ",
+        "position": "DX推進担当"
+      },
+      {
+        "user_id": "u_0009",
+        "user_name": "吉田 健",
+        "company_name": "株式会社丸金商会",
+        "position": "代表取締役 社長"
+      },
+      {
+        "user_id": "u_0007",
+        "user_name": "石田 一郎",
+        "company_name": "インプルーブ株式会社",
+        "position": "代表取締役 社長"
+      },
+      {
+        "user_id": "u_0001",
+        "user_name": "田中 健太",
+        "company_name": "中国ゴム工業株式会社",
+        "position": "代表取締役"
+      },
+      {
+        "user_id": "u_0003",
+        "user_name": "鈴木 翔",
+        "company_name": "株式会社アクセサリーマルタカ",
+        "position": "経営企画室長"
+      }
+    ],
+    "status": "completed",
+    "notes": "参加者へ事前資料を共有済み。当日のアジェンダは別途送付。"
+  }
+]

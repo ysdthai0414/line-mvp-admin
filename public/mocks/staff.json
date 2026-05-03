@@ -1,0 +1,74 @@
+[
+  {
+    "id": "s_0001",
+    "email": "kohei.yoshida@ynmo.example.jp",
+    "name": "吉田 航平",
+    "name_kana": "ヨシダ コウヘイ",
+    "role": "admin",
+    "department": "事務局統括",
+    "avatar_url": "https://api.dicebear.com/7.x/notionists/svg?seed=s0001_yoshida",
+    "last_login_at": "2026-05-02T20:00:00+09:00",
+    "created_at": "2026-01-02T22:00:00+09:00",
+    "status": "active"
+  },
+  {
+    "id": "s_0002",
+    "email": "kaori.onodera@captains.example.jp",
+    "name": "小野寺 香織",
+    "name_kana": "オノデラ カオリ",
+    "role": "admin",
+    "department": "リード・実装（受託）",
+    "avatar_url": "https://api.dicebear.com/7.x/notionists/svg?seed=s0002_onodera",
+    "last_login_at": "2026-05-02T17:00:00+09:00",
+    "created_at": "2025-11-03T22:00:00+09:00",
+    "status": "active"
+  },
+  {
+    "id": "s_0003",
+    "email": "takashi.suzuki@ynmo.example.jp",
+    "name": "鈴木 隆",
+    "name_kana": "スズキ タカシ",
+    "role": "manager",
+    "department": "コンテンツ管理",
+    "avatar_url": "https://api.dicebear.com/7.x/notionists/svg?seed=s0003",
+    "last_login_at": "2026-05-01T22:00:00+09:00",
+    "created_at": "2026-02-01T22:00:00+09:00",
+    "status": "active"
+  },
+  {
+    "id": "s_0004",
+    "email": "yuka.takahashi@ynmo.example.jp",
+    "name": "高橋 由佳",
+    "name_kana": "タカハシ ユカ",
+    "role": "manager",
+    "department": "マッチング・相談会運営",
+    "avatar_url": "https://api.dicebear.com/7.x/notionists/svg?seed=s0004",
+    "last_login_at": "2026-04-30T22:00:00+09:00",
+    "created_at": "2026-03-03T22:00:00+09:00",
+    "status": "active"
+  },
+  {
+    "id": "s_0005",
+    "email": "shun.ito@ynmo.example.jp",
+    "name": "伊藤 駿",
+    "name_kana": "イトウ シュン",
+    "role": "member",
+    "department": "ユーザーサポート",
+    "avatar_url": "https://api.dicebear.com/7.x/notionists/svg?seed=s0005",
+    "last_login_at": "2026-05-02T10:00:00+09:00",
+    "created_at": "2026-03-18T22:00:00+09:00",
+    "status": "active"
+  },
+  {
+    "id": "s_0006",
+    "email": "ai.watanabe@ynmo.example.jp",
+    "name": "渡辺 愛",
+    "name_kana": "ワタナベ アイ",
+    "role": "viewer",
+    "department": "監査",
+    "avatar_url": "https://api.dicebear.com/7.x/notionists/svg?seed=s0006",
+    "last_login_at": "2026-04-25T22:00:00+09:00",
+    "created_at": "2026-04-02T22:00:00+09:00",
+    "status": "active"
+  }
+]

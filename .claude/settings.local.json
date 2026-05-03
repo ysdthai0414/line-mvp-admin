@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p /Users/onoderakaori/ynmo-admin/public/mocks)",
+      "Bash(cp \"/Users/onoderakaori/Library/Application Support/Claude/local-agent-mode-sessions/112195a3-2826-4225-aac1-730811dd920e/0b9e00d8-e703-498e-ad4a-4bc90bdd87af/local_6692c126-b8a8-41ea-8a21-d880c3ac21ea/outputs/mocks/\"*.json /Users/onoderakaori/ynmo-admin/public/mocks/)"
+    ]
+  }
+}
