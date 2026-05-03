@@ -77,6 +77,7 @@ export type CaseData = {
   company_name: string
   status: CaseStatus | string
   pdf_filename?: string
+  pdf_url?: string
   publish_at?: string
   upload_at?: string
   target_industries?: string[]
@@ -129,11 +130,13 @@ function CaseStatusBadge({ status }: { status: string }) {
 
 function PdfPanel({
   filename,
+  pdfUrl,
   uploadedName,
   onSelectFile,
   disabled,
 }: {
   filename?: string
+  pdfUrl?: string
   uploadedName: string | null
   onSelectFile: (name: string) => void
   disabled: boolean
@@ -154,9 +157,21 @@ function PdfPanel({
   return (
     <Card className="flex h-full flex-col">
       <CardContent className="flex flex-1 flex-col gap-4 p-6">
-        <div className="flex items-center gap-2 text-sm font-medium">
-          <FileText className="size-4 text-muted-foreground" />
-          <span className="truncate">{displayName ?? "未アップロード"}</span>
+        <div className="flex items-center justify-between gap-2 text-sm font-medium">
+          <div className="flex items-center gap-2 min-w-0">
+            <FileText className="size-4 shrink-0 text-muted-foreground" />
+            <span className="truncate">{displayName ?? "未アップロード"}</span>
+          </div>
+          {pdfUrl && (
+            <a
+              href={pdfUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shrink-0 text-xs text-primary hover:underline"
+            >
+              新規タブで開く →
+            </a>
+          )}
         </div>
 
         <input
@@ -167,13 +182,21 @@ function PdfPanel({
           onChange={handleChange}
         />
 
-        <div className="flex min-h-[600px] flex-1 items-center justify-center rounded-lg border border-dashed bg-muted/20">
-          {displayName ? (
+        <div className="flex min-h-[600px] flex-1 items-center justify-center rounded-lg border border-dashed bg-muted/20 overflow-hidden">
+          {pdfUrl ? (
+            // iframe で PDF を埋め込み表示。サーバーが X-Frame-Options で拒否した場合は
+            // 上の「新規タブで開く」リンクにフォールバックする想定。
+            <iframe
+              src={pdfUrl}
+              className="size-full border-0"
+              title={displayName ?? "PDF preview"}
+            />
+          ) : displayName ? (
             <div className="flex flex-col items-center gap-3 text-center">
               <FileText className="size-24 text-muted-foreground/30" />
               <div className="text-sm text-muted-foreground">{displayName}</div>
               <div className="text-xs text-muted-foreground/60">
-                ※ プレビュー機能は今後実装予定
+                ※ PDF URL が設定されていません
               </div>
             </div>
           ) : (
@@ -449,6 +472,7 @@ export function CaseEditor({
       <div className="grid min-h-[calc(100vh-200px)] grid-cols-1 gap-6 lg:grid-cols-2">
         <PdfPanel
           filename={initialCase?.pdf_filename}
+          pdfUrl={initialCase?.pdf_url}
           uploadedName={uploadedName}
           onSelectFile={(name) => setUploadedName(name)}
           disabled={disabled}
