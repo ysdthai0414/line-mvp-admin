@@ -1,11 +1,11 @@
 # =====================================================================
 # 管理コンソール (ynmo-admin) → Azure App Service デプロイ
 #
-# - main ブランチへの push で自動実行
-# - Node 20 で npm ci → npm run build (Next.js)
-# - .next / public / package.json / package-lock.json / next.config.ts /
-#   node_modules を artifact 化して Azure に upload
-# - 起動コマンドは Azure 側で `npm run start` を設定する想定
+# 配信戦略：Next.js standalone 出力
+#   - .next/standalone/ に server.js + tracing された最小 node_modules が入る
+#   - そこに .next/static/ と public/ をコピーして自己完結バンドルにする
+#   - 巨大な node_modules を artifact として持ち回らないので symlink 破損が起きない
+#   - Azure 側の起動コマンドは「node server.js」を設定する
 # =====================================================================
 name: Build and deploy ynmo-admin to Azure Web App - tech0-gen-11-step4-node-10
 
@@ -33,24 +33,23 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build Next.js
+      - name: Build Next.js (standalone)
         run: npm run build
 
-      - name: Prepare deployment package
+      - name: Assemble standalone bundle
         run: |
-          mkdir -p deploy
-          cp -r .next deploy/
-          cp -r public deploy/
-          cp -r node_modules deploy/
-          cp package.json package-lock.json next.config.ts deploy/
+          # standalone は .next/static / public を内包しないので明示的に組み込む
+          cp -r .next/static .next/standalone/.next/
+          cp -r public .next/standalone/
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: deploy
-          # node_modules を含む大きい artifact を圧縮する
+          path: .next/standalone
           if-no-files-found: error
+          # 隠しファイル（.env など）はそもそも standalone に含めない設計だが念のため
+          include-hidden-files: false
 
   deploy:
     runs-on: ubuntu-latest
