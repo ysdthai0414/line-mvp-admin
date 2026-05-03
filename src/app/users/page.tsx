@@ -49,6 +49,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { getUsers } from "@/lib/api-client"
 import { INDUSTRY_LIST } from "@/lib/master-data"
 import {
   SALES_PHASES,
@@ -250,19 +251,14 @@ export default function UsersListPage() {
   const [sortDir, setSortDir] = React.useState<"asc" | "desc">("desc")
 
   React.useEffect(() => {
-    let cancelled = false
-    fetch("/mocks/users.json")
-      .then((r) => r.json())
-      .then((d: User[]) => {
-        if (!cancelled) setUsers(d)
-      })
+    const ac = new AbortController()
+    getUsers({ signal: ac.signal })
+      .then((d) => setUsers(d as User[]))
       .catch((e: unknown) => {
-        if (!cancelled)
-          setError(e instanceof Error ? e.message : String(e))
+        if (e instanceof Error && e.name === "AbortError") return
+        setError(e instanceof Error ? e.message : String(e))
       })
-    return () => {
-      cancelled = true
-    }
+    return () => ac.abort()
   }, [])
 
   const phaseCounts = React.useMemo(() => {

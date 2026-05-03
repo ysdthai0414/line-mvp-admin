@@ -45,7 +45,7 @@ export async function getCurrentStaff(opts?: FetchOptions): Promise<CurrentStaff
 // ---------------------------------------------------------------------
 // /api/companies
 // ---------------------------------------------------------------------
-import type { CaseDto, CompanyDto } from "@/types/db";
+import type { CaseDto, CompanyDto, UserDto } from "@/types/db";
 
 export async function getCompanies(opts?: FetchOptions): Promise<CompanyDto[]> {
   return fetchJson<CompanyDto[]>(
@@ -60,6 +60,16 @@ export async function getCompanies(opts?: FetchOptions): Promise<CompanyDto[]> {
 export async function getCases(opts?: FetchOptions): Promise<CaseDto[]> {
   return fetchJson<CaseDto[]>(
     USE_MOCK ? "/mocks/cases.json" : "/api/initiatives",
+    opts
+  );
+}
+
+// ---------------------------------------------------------------------
+// /api/users
+// ---------------------------------------------------------------------
+export async function getUsers(opts?: FetchOptions): Promise<UserDto[]> {
+  return fetchJson<UserDto[]>(
+    USE_MOCK ? "/mocks/users.json" : "/api/users",
     opts
   );
 }

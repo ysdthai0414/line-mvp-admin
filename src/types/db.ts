@@ -51,6 +51,75 @@ export interface ApprovedCompanyRow extends RowDataPacket {
 }
 
 // ---------------------------------------------------------------------
+// Users（LINE ユーザー：オンボーディング状態管理）
+// Bot 側 db/schema_v4.sql 準拠
+// ---------------------------------------------------------------------
+export type UserState = "NEW" | "AWAITING_CONFIRM" | "CONFIRMED" | "NOT_APPROVED";
+
+export interface UserRow extends RowDataPacket {
+  line_user_id: string;
+  state: UserState;
+  approved_company_id: number | null;
+  sales_tier: string | null;
+  annual_sales: number | null;
+  pending_company_name: string | null;
+  pending_company_url: string | null;
+  pending_profile_json: unknown;
+  interests: unknown;
+  disliked_categories: unknown;
+  pending_interest_picks: number;
+  created_at: Date;
+  updated_at: Date;
+}
+
+// ---------------------------------------------------------------------
+// Profiles（確定済プロファイル：複数行可、最新のみ参照）
+// ---------------------------------------------------------------------
+export interface ProfileRow extends RowDataPacket {
+  id: number;
+  line_user_id: string;
+  approved_company_id: number | null;
+  company_name: string;
+  company_url: string;
+  sales_tier: string | null;
+  annual_sales: number | null;
+  profile_json: unknown;
+  created_at: Date;
+}
+
+// profile_json の中身（Bot 側 src/ai.js generateCompanyProfile の出力）
+export interface ProfileJson {
+  business_summary?: string;
+  target_customers?: string;
+  industry_tags?: string[];
+  management_themes?: string[];
+  wanted_support_areas?: string[];
+  strengths?: string[];
+}
+
+// 管理画面（UI）の User 型互換 DTO
+// 注：Bot は現状 name/email/name_kana/position を収集していないため、
+// これらは placeholder で返す。将来 Bot 側で getProfile() を導入したら充実できる。
+export interface UserDto {
+  id: string;                        // line_user_id をそのまま使う
+  email: string;
+  name: string;
+  name_kana: string;
+  company_id: string;
+  company_name: string;
+  company_industry: string;
+  company_prefecture: string;
+  position: string;
+  sales_phase: string;
+  status: UserState;
+  avatar_url: string;
+  last_login_at: string | null;
+  registered_at: string;
+  push_enabled: boolean;
+  last_active_at: string;
+}
+
+// ---------------------------------------------------------------------
 // Initiatives（取り組み事例：配信ネタ）
 // Bot 側 db/schema_v3.sql 準拠（v2 で導入、v3 で bullet_points 追加）
 // ---------------------------------------------------------------------
