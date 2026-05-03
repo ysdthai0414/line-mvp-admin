@@ -39,6 +39,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { getCompanies } from "@/lib/api-client"
 import { INDUSTRY_LIST, PREFECTURE_LIST } from "@/lib/master-data"
 import { SALES_PHASES, SALES_PHASE_LABELS } from "@/lib/status-labels"
 import { cn } from "@/lib/utils"
@@ -258,22 +259,15 @@ export default function CompaniesPage() {
   const [sheetOpen, setSheetOpen] = React.useState(false)
 
   React.useEffect(() => {
-    let cancelled = false
-    fetch("/mocks/companies.json")
-      .then((r) => {
-        if (!r.ok) throw new Error("/mocks/companies.json failed")
-        return r.json()
-      })
-      .then((d: Company[]) => {
-        if (!cancelled) setCompanies(d)
-      })
+    const ac = new AbortController()
+    getCompanies({ signal: ac.signal })
+      .then((d) => setCompanies(d))
       .catch((e: unknown) => {
-        if (!cancelled)
-          setError(e instanceof Error ? e.message : String(e))
+        // AbortError は次の effect 実行による意図的な中断なので無視
+        if (e instanceof Error && e.name === "AbortError") return
+        setError(e instanceof Error ? e.message : String(e))
       })
-    return () => {
-      cancelled = true
-    }
+    return () => ac.abort()
   }, [])
 
   // Reset to page 1 when filter changes
