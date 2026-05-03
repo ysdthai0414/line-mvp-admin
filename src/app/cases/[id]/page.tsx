@@ -10,6 +10,7 @@ import {
   CaseEditorSkeleton,
   type CaseData,
 } from "@/components/cases/case-editor"
+import { getCases } from "@/lib/api-client"
 
 export default function CaseDetailPage() {
   const params = useParams<{ id: string }>()
@@ -20,15 +21,10 @@ export default function CaseDetailPage() {
 
   React.useEffect(() => {
     if (!id) return
-    let cancelled = false
-    fetch("/mocks/cases.json")
-      .then((r) => {
-        if (!r.ok) throw new Error("/mocks/cases.json failed")
-        return r.json()
-      })
-      .then((cases: CaseData[]) => {
-        if (cancelled) return
-        const found = cases.find((c) => c.id === id)
+    const ac = new AbortController()
+    getCases({ signal: ac.signal })
+      .then((cases) => {
+        const found = (cases as unknown as CaseData[]).find((c) => c.id === id)
         if (!found) {
           setError(`事例 ID "${id}" が見つかりませんでした`)
           return
@@ -36,12 +32,10 @@ export default function CaseDetailPage() {
         setData(found)
       })
       .catch((e: unknown) => {
-        if (!cancelled)
-          setError(e instanceof Error ? e.message : String(e))
+        if (e instanceof Error && e.name === "AbortError") return
+        setError(e instanceof Error ? e.message : String(e))
       })
-    return () => {
-      cancelled = true
-    }
+    return () => ac.abort()
   }, [id])
 
   if (error) {
