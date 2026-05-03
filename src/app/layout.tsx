@@ -28,6 +28,9 @@ export default function RootLayout({
     <html
       lang="ja"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      // ブラウザ拡張が <html>/<body> に属性を後付けして hydration mismatch を起こすのを抑制。
+      // Next.js 公式が推奨するパターン。コンポーネント内の本物の mismatch は引き続き検知される。
+      suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
         <ConditionalLayout>{children}</ConditionalLayout>
