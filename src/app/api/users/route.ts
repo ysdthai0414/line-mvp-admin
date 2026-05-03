@@ -23,6 +23,7 @@ interface UserJoinedRow extends RowDataPacket {
   // Users
   line_user_id: string;
   state: UserState;
+  display_name: string | null;       // Phase 7-1
   approved_company_id: number | null;
   annual_sales: number | null;
   created_at: Date;
@@ -65,6 +66,7 @@ export async function GET() {
       `SELECT
          u.line_user_id,
          u.state,
+         u.display_name,
          u.approved_company_id,
          u.annual_sales,
          u.created_at,
@@ -104,10 +106,13 @@ export async function GET() {
           ? profile.management_themes[0]
           : "";
 
+      // Phase 7-1：display_name があればそれを使い、無ければ placeholder
+      const displayName = r.display_name?.trim() || placeholderName(r.line_user_id);
+
       return {
         id: r.line_user_id,
         email: "",
-        name: placeholderName(r.line_user_id),
+        name: displayName,
         name_kana: "",
         company_id: r.approved_company_id
           ? `co_${String(r.approved_company_id).padStart(5, "0")}`

@@ -157,6 +157,7 @@ export type UserState = "NEW" | "AWAITING_CONFIRM" | "CONFIRMED" | "NOT_APPROVED
 export interface UserRow extends RowDataPacket {
   line_user_id: string;
   state: UserState;
+  display_name: string | null;       // Phase 7-1：LINE displayName
   approved_company_id: number | null;
   sales_tier: string | null;
   annual_sales: number | null;
