@@ -4,6 +4,7 @@ import * as React from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import {
+  Activity,
   Building2,
   Calendar,
   FileText,
@@ -81,6 +82,7 @@ const NAV_GROUPS: { label: string; items: NavItem[] }[] = [
     items: [
       { href: "/sessions", label: "相談会", icon: Calendar },
       { href: "/users", label: "ユーザー", icon: Users2 },
+      { href: "/users/analytics", label: "ユーザー分析", icon: Activity },
       { href: "/companies", label: "認可企業マスタ", icon: Building2 },
     ],
   },
@@ -90,8 +92,18 @@ const NAV_GROUPS: { label: string; items: NavItem[] }[] = [
   },
 ]
 
-function isItemActive(pathname: string, href: string) {
+function isItemActive(pathname: string, href: string, allHrefs: string[]) {
   if (href === "/") return pathname === "/"
+  // 自身より長い prefix を持つ別のメニュー項目に該当している場合、自身は active 化しない。
+  // 例：/users と /users/analytics の両方が登録されているとき、pathname=/users/analytics なら
+  // /users は active にならず、/users/analytics だけ active になる。
+  const moreSpecificMatch = allHrefs.some(
+    (h) =>
+      h !== href &&
+      h.startsWith(`${href}/`) &&
+      (pathname === h || pathname.startsWith(`${h}/`)),
+  )
+  if (moreSpecificMatch) return false
   return pathname === href || pathname.startsWith(`${href}/`)
 }
 
@@ -158,7 +170,8 @@ export function Sidebar() {
             <SidebarGroupContent>
               <SidebarMenu>
                 {group.items.map((item) => {
-                  const active = isItemActive(pathname, item.href)
+                  const allHrefs = NAV_GROUPS.flatMap((g) => g.items.map((i) => i.href))
+                  const active = isItemActive(pathname, item.href, allHrefs)
                   const Icon = item.icon
                   return (
                     <SidebarMenuItem key={item.href}>

@@ -926,12 +926,15 @@ export default function DashboardPage() {
           loading={loading}
         />
         <KpiCard
-          label="配信開封率"
-          value="68.4%"
-          delta={{ text: "前月比 +2.3pt", positive: true }}
+          label="反応率（直近30日）"
+          value={
+            loading
+              ? ""
+              : `${((data?.stats?.summary?.reaction_rate_30d ?? 0) * 100).toFixed(1)}%`
+          }
           icon={Mail}
           accent="info"
-          loading={false}
+          loading={loading}
         />
         <KpiCard
           label="今月のマッチング"

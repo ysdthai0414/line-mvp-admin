@@ -51,6 +51,41 @@ export interface ApprovedCompanyRow extends RowDataPacket {
 }
 
 // ---------------------------------------------------------------------
+// User Analytics（ユーザーごとのエンゲージメント集計）
+// /api/users/analytics で返す
+// ---------------------------------------------------------------------
+export type EngagementBucket = "active" | "moderate" | "silent";
+
+export interface UserAnalyticsDto {
+  id: string;                        // line_user_id
+  name: string;                      // display_name or placeholder
+  company_name: string;
+  registered_at: string;
+  delivery_count: number;            // DeliveryLog 件数
+  helpful_count: number;             // 'helpful' フィードバック数
+  not_helpful_count: number;         // 'not_helpful' フィードバック数
+  matching_count: number;            // MatchingRequests 件数
+  last_activity_at: string | null;   // フィードバック・マッチ申請のうち最新
+  reaction_rate: number;             // helpful + not_helpful / delivery_count
+  engagement_score: number;          // helpful*1 + not_helpful*0.5 + matching*5
+  bucket: EngagementBucket;          // 積極/普通/沈黙
+}
+
+export interface UserAnalyticsSummaryDto {
+  total: number;
+  active: number;                    // 積極的（score>=5）
+  moderate: number;                  // 普通（0<score<5）
+  silent: number;                    // 沈黙（score=0 or 30日以上無反応）
+  reaction_rate_30d: number;         // 直近30日の反応率（フィードバックされた配信比率）
+}
+
+export interface UserAnalyticsResponseDto {
+  summary: UserAnalyticsSummaryDto;
+  users: UserAnalyticsDto[];
+  generated_at: string;
+}
+
+// ---------------------------------------------------------------------
 // Stats（KPI 集約）
 // ダッシュボード（/）と /matchings/aggregate が参照する。
 // public/mocks/stats.json と同形だが、現状 DB スキーマで埋められない欄は空配列で返す。
@@ -89,6 +124,7 @@ export interface StatsDto {
     companies_at_threshold: number;
     matching_threshold: number;
     monthly_growth_rate: number;
+    reaction_rate_30d: number;       // Phase 7-4：直近30日のフィードバック付与率（0..1）
   };
   matchings_by_status: {
     待機中: number;

@@ -47,6 +47,11 @@ interface PendingPerCompanyRow extends RowDataPacket {
   match_count: number;
 }
 
+interface ReactionRateRow extends RowDataPacket {
+  total_deliveries: number;
+  reactions: number;
+}
+
 export async function GET() {
   try {
     await requireStaff();
@@ -59,6 +64,7 @@ export async function GET() {
       [casesPublished],
       [casesDraft],
       [companiesTotal],
+      [reactionRow],
       statusBreakdownRows,
       pendingPerCompanyRows,
       thresholdCompaniesRows,
@@ -69,6 +75,14 @@ export async function GET() {
       query<CountRow>("SELECT COUNT(*) AS cnt FROM Initiatives WHERE status = 'published'"),
       query<CountRow>("SELECT COUNT(*) AS cnt FROM Initiatives WHERE status = 'draft'"),
       query<CountRow>("SELECT COUNT(*) AS cnt FROM ApprovedCompanies"),
+      // Phase 7-4：直近30日の反応率（フィードバック付与率）
+      query<ReactionRateRow>(
+        `SELECT
+           COUNT(*) AS total_deliveries,
+           SUM(CASE WHEN feedback IS NOT NULL THEN 1 ELSE 0 END) AS reactions
+         FROM DeliveryLog
+         WHERE delivered_at >= DATE_SUB(NOW(), INTERVAL 30 DAY)`
+      ),
       // DB の 3 値ステータス別件数
       query<MatchingStatusBreakdownRow>(
         `SELECT status, COUNT(*) AS cnt
@@ -133,6 +147,11 @@ export async function GET() {
       oldest_request_at: r.oldest_request_at.toISOString(),
     }));
 
+    const totalDeliveries = Number(reactionRow?.total_deliveries ?? 0);
+    const totalReactions = Number(reactionRow?.reactions ?? 0);
+    const reactionRate30d =
+      totalDeliveries > 0 ? totalReactions / totalDeliveries : 0;
+
     const stats: StatsDto = {
       summary: {
         total_users: Number(usersTotal.cnt),
@@ -149,6 +168,7 @@ export async function GET() {
         companies_at_threshold: thresholdCompanies.length,
         matching_threshold: MATCHING_THRESHOLD,
         monthly_growth_rate: 0,
+        reaction_rate_30d: Math.round(reactionRate30d * 1000) / 1000,
       },
       matchings_by_status: {
         待機中: waitingPending,

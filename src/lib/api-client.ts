@@ -51,6 +51,7 @@ import type {
   MatchingDto,
   MatchingUiStatus,
   StatsDto,
+  UserAnalyticsResponseDto,
   UserDto,
 } from "@/types/db";
 
@@ -79,6 +80,15 @@ export async function getUsers(opts?: FetchOptions): Promise<UserDto[]> {
     USE_MOCK ? "/mocks/users.json" : "/api/users",
     opts
   );
+}
+
+// ---------------------------------------------------------------------
+// /api/users/analytics
+// ---------------------------------------------------------------------
+export async function getUserAnalytics(
+  opts?: FetchOptions
+): Promise<UserAnalyticsResponseDto> {
+  return fetchJson<UserAnalyticsResponseDto>("/api/users/analytics", opts);
 }
 
 // ---------------------------------------------------------------------
